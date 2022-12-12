@@ -8,7 +8,7 @@ import argparse
 PATH = 'images'
 os.chdir(PATH)
 
-def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=15.0):
+def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=20.0):
 
     print("Initializing webcam...")
     imgCap = cv2.VideoCapture(0)
@@ -38,15 +38,16 @@ def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=
             if denoise:
                 prepared_frame = cv2.GaussianBlur(src=prepared_frame, ksize=(5,5), sigmaX=0) # denoise
 
-            # detect motion and save image
-            if save_images:
+            mse = motion_detection.motion_detector(oldFrame, prepared_frame) # get mean squared error
+            print(f"MSE: {mse:.2f}")
 
-                mse = motion_detection.motion_detector(oldFrame, prepared_frame) # get mean squared error
+            # detect motion and save image
+            if save_images and mse > threshold:
 
                 # save image with mean-squared error data
-                if mse > threshold: 
-                    cv2.imwrite(f"{frameNum}_{mse:.0f}.jpg", prepared_frame)
-                    frameNum += 1
+                print(f"Saving image with MSE: {mse:.2f}")
+                cv2.imwrite(f"{frameNum}_{mse:.0f}.jpg", prepared_frame)
+                frameNum += 1
 
             oldFrame = prepared_frame
         
@@ -69,7 +70,7 @@ def read_cmdline():
     p.add_argument('function')
     p.add_argument("--save-images",type=bool, choices=[True,False],required=False)
     p.add_argument("--show-webcam",type=bool, choices=[True,False],required=False)
-    p.add_argument("--denoise",type=float, required=False)
+    p.add_argument("--denoise",type=bool, choices=[True,False],required=False)
     p.add_argument("--threshold",type=float, required=False)
     args=p.parse_args()
     return args 
