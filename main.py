@@ -71,7 +71,7 @@ def read_cmdline():
     p.add_argument("--save-images",type=bool, choices=[True,False],required=False)
     p.add_argument("--show-webcam",type=bool, choices=[True,False],required=False)
     p.add_argument("--denoise",type=bool, choices=[True,False],required=False)
-    p.add_argument("--threshold",type=float, required=False)
+    p.add_argument("--threshold",type=float, required=False, default=20.0)
     args=p.parse_args()
     return args 
 
