@@ -5,15 +5,8 @@ import numpy as np
 def motion_detector(oldFrame, newFrame):
 
     if oldFrame is None:
-        return False
+        return 0.0
 
-    mse = np.square(np.subtract(oldFrame, newFrame)).mean()
-
-    # threshold for detection ( background noise is less than 2 )
-    if mse > 5:
-        print("MSE:", mse)
-        return True
-
-    return False
+    return np.square(np.subtract(oldFrame, newFrame)).mean()
 
 

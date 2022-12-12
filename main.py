@@ -36,9 +36,14 @@ def start_capture(save_images=False, show_webcam=False):
             prepared_frame = cv2.GaussianBlur(src=resized_frame, ksize=(5,5), sigmaX=0) # denoise
 
             # detect motion and save image
-            if motion_detection.motion_detector(oldFrame, prepared_frame) and save_images:
-                cv2.imwrite(f"{frameNum}.jpg", prepared_frame)
-                frameNum += 1
+            if save_images:
+
+                mse = motion_detection.motion_detector(oldFrame, prepared_frame) # get mean squared error
+
+                # save image with mean-squared error data
+                if mse > 12.0: 
+                    cv2.imwrite(f"{frameNum}_{mse:.0f}.jpg", prepared_frame)
+                    frameNum += 1
 
             oldFrame = prepared_frame
         
