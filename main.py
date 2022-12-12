@@ -8,7 +8,7 @@ import argparse
 PATH = 'images'
 os.chdir(PATH)
 
-def start_capture(save_images=False, show_webcam=False):
+def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=15.0):
 
     print("Initializing webcam...")
     imgCap = cv2.VideoCapture(0)
@@ -31,9 +31,12 @@ def start_capture(save_images=False, show_webcam=False):
             ret, frame = imgCap.read()
 
             # cleanup
-            gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # gray 
-            resized_frame = cv2.resize(gray_frame, (256, 256)) # resize
-            prepared_frame = cv2.GaussianBlur(src=resized_frame, ksize=(5,5), sigmaX=0) # denoise
+            prepared_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # gray 
+            prepared_frame = cv2.resize(prepared_frame, (256, 256)) # resize
+
+            # denoising can be an expensive operation
+            if denoise:
+                prepared_frame = cv2.GaussianBlur(src=prepared_frame, ksize=(5,5), sigmaX=0) # denoise
 
             # detect motion and save image
             if save_images:
@@ -41,7 +44,7 @@ def start_capture(save_images=False, show_webcam=False):
                 mse = motion_detection.motion_detector(oldFrame, prepared_frame) # get mean squared error
 
                 # save image with mean-squared error data
-                if mse > 12.0: 
+                if mse > threshold: 
                     cv2.imwrite(f"{frameNum}_{mse:.0f}.jpg", prepared_frame)
                     frameNum += 1
 
@@ -66,11 +69,13 @@ def read_cmdline():
     p.add_argument('function')
     p.add_argument("--save-images",type=bool, choices=[True,False],required=False)
     p.add_argument("--show-webcam",type=bool, choices=[True,False],required=False)
+    p.add_argument("--denoise",type=float, required=False)
+    p.add_argument("--threshold",type=float, required=False)
     args=p.parse_args()
     return args 
 
 if __name__ == '__main__':
     args = read_cmdline()
     print(args)
-    globals()[args.function](args.save_images, args.show_webcam)
+    globals()[args.function](args.save_images, args.show_webcam, args.denoise, args.threshold)
 
