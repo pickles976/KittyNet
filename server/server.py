@@ -3,8 +3,8 @@ import websockets
 import cv2
 import time
 
-encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-SCALE = 0.4
+encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
+SCALE = 0.7
 FPS = 1.0
 
 print("Initializing webcam...")
