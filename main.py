@@ -77,6 +77,5 @@ def read_cmdline():
 
 if __name__ == '__main__':
     args = read_cmdline()
-9
     globals()[args.function](args.save_images, args.show_webcam, args.denoise, args.threshold)
 
