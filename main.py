@@ -55,8 +55,8 @@ def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=
             # prepared_frame = cv2.resize(prepared_frame, (256, 256)) # resize
 
             # # denoising can be an expensive operation
-            # if denoise:
-            #     prepared_frame = cv2.GaussianBlur(src=prepared_frame, ksize=(5,5), sigmaX=0) # denoise
+            if denoise:
+                prepared_frame = cv2.GaussianBlur(src=prepared_frame, ksize=(5,5), sigmaX=0) # denoise
 
             mse = motion_detection.motion_detector(oldFrame, prepared_frame) # get mean squared error
             print(f"MSE: {mse:.2f}")
