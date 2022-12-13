@@ -50,7 +50,7 @@ def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=
 
             # cleanup
             prepared_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # gray 
-            prepared_frame = cv2.resize(prepared_frame, (256, 256)) # resize
+            # prepared_frame = cv2.resize(prepared_frame, (256, 256)) # resize
 
             # denoising can be an expensive operation
             if denoise:
