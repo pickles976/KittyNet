@@ -10,7 +10,7 @@ os.chdir(PATH)
 
 def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=10.0):
 
-    print(f"--save-images {save_images}")
+    print(f"--save-images {save_images}, --show-webcam {show_webcam}")
 
     print("Initializing webcam...")
     imgCap = cv2.VideoCapture(0)
