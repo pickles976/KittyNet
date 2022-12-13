@@ -8,7 +8,7 @@ import argparse
 PATH = 'images'
 os.chdir(PATH)
 
-def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=20.0):
+def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=10.0):
 
     print("Initializing webcam...")
     imgCap = cv2.VideoCapture(0)
@@ -71,12 +71,12 @@ def read_cmdline():
     p.add_argument("--save-images",type=bool, choices=[True,False],required=False)
     p.add_argument("--show-webcam",type=bool, choices=[True,False],required=False)
     p.add_argument("--denoise",type=bool, choices=[True,False],required=False)
-    p.add_argument("--threshold",type=float, required=False, default=20.0)
+    p.add_argument("--threshold",type=float, required=False, default=10.0)
     args=p.parse_args()
     return args 
 
 if __name__ == '__main__':
     args = read_cmdline()
-    print(args)
+9
     globals()[args.function](args.save_images, args.show_webcam, args.denoise, args.threshold)
 
