@@ -5,7 +5,9 @@ import os
 import sys
 import argparse
 
+FPS = 1.0
 PATH = 'images'
+COLD_START = 30
 os.chdir(PATH)
 
 def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=10.0):
@@ -14,14 +16,28 @@ def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=
 
     print("Initializing webcam...")
     imgCap = cv2.VideoCapture(0)
-    print("Webcam initialized!")
-
-    FPS = 0.3
 
     time_elapsed = 0
     prev = 0
     oldFrame = None
     frameNum = 0
+
+    print("Webcam cold start...")
+    while True:
+
+        time_elapsed = time.time() - prev
+
+        if time_elapsed > 1.0/30.0:
+
+            if frameNum < COLD_START:
+                # Capture the video frame
+                ret, frame = imgCap.read()
+                frameNum += 1
+            else:
+                frameNum = 0
+                break
+
+    print("Webcam initialized!")
 
     while True:
 

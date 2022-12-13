@@ -1,1 +1,18 @@
 MSE default:
+
+Initializing webcam...
+Webcam initialized!
+MSE: 0.00
+MSE: 111.29
+MSE: 81.52
+MSE: 47.45
+MSE: 28.44
+MSE: 87.49
+MSE: 1.31
+MSE: 1.65
+MSE: 1.09
+MSE: 1.14
+MSE: 1.28
+MSE: 1.33
+
+MSE with brightness:
