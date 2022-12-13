@@ -5,7 +5,7 @@ import time
 
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
 SCALE = 0.4
-FPS = 5.0
+FPS = 1.0
 
 print("Initializing webcam...")
 imgCap = cv2.VideoCapture(0)
