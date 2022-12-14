@@ -4,6 +4,7 @@ import motion_detection
 import os
 import sys
 import argparse
+from datetime import datetime
 
 FPS = 1.0
 PATH = 'images'
@@ -64,9 +65,11 @@ def start_capture(save_images=False, show_webcam=False, denoise=True, threshold=
             # detect motion and save image
             if save_images and mse > threshold:
 
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
                 # save image with mean-squared error data
                 print(f"Saving image with MSE: {mse:.2f}")
-                cv2.imwrite(f"{frameNum}_{mse:.0f}.jpg", prepared_frame)
+                cv2.imwrite(f"{timestamp}_{mse:.0f}.jpg", frame)
                 frameNum += 1
 
             oldFrame = prepared_frame
