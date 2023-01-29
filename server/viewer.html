@@ -12,6 +12,8 @@
     <input type="text" id="ip" name="ip"><br><br>
     <button onclick="contactServer()">Connect</button><br><br>
     <img id="ItemPreview" src="">
+
+    <img width="800" height="800" src="http://172.20.1.41:8080/cam.mjpg"/>
 </body>
  
 <script>
@@ -20,6 +22,10 @@
 
     // Connect
     let socket = {};
+
+    const showChanged = () => {
+        console.log("New frame received!")
+    }
 
     const contactServer = () => {
     
