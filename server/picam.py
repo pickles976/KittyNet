@@ -8,7 +8,7 @@ import numpy as np
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
 SCALE = 0.7
 FPS = 24.0
-SIZE = (640, 480, 3)
+SIZE = (640, 480)
 
 # create handler for each connection
 async def handler(websocket, path):
@@ -16,7 +16,7 @@ async def handler(websocket, path):
     print("Initializing webcam...")
     with PiCamera() as camera:
 
-        camera.resolution = (640, 480)
+        camera.resolution = SIZE
         camera.framerate = FPS
         time.sleep(2)
         print("Webcam initialized!")
@@ -24,13 +24,13 @@ async def handler(websocket, path):
         while True:
 
             # Capture the video frame
-            frame = np.empty(SIZE, dtype=np.uint8)
+            frame = np.empty((SIZE[0] * SIZE[1] * 3), dtype=np.uint8)
             camera.capture(frame, 'bgr')
 
             # Resize
-            width = int(frame.shape[1] * SCALE)
-            height = int(frame.shape[0] * SCALE)
-            frame = cv2.resize(frame, (width, height))
+            # width = int(frame.shape[1] * SCALE)
+            # height = int(frame.shape[0] * SCALE)
+            # frame = cv2.resize(frame, (width, height))
 
             # To bytes
             frameData = cv2.imencode('.jpg', frame, encode_param)[1].tobytes()
