@@ -24,7 +24,7 @@ async def handler(websocket, path):
         while True:
 
             # Capture the video frame
-            frame = np.empty((SIZE[0] * SIZE[1] * 3), dtype=np.uint8)
+            frame = np.empty((SIZE[0] * SIZE[1] * 3,), dtype=np.uint8)
             camera.capture(frame, 'bgr')
 
             # Resize
