@@ -2,6 +2,10 @@
 ### TODO:
 - [x] Fix brightness issue
 - [x] Get working with threshold
+- [ ] Add white balance disable to script
+- [ ] Build dataset
+- [ ] Pre-train Yolonet on cats
+- [ ] Finetune on my cats
 
 ### Compensating for white balance adjustment
 v4l2-ctl -l
