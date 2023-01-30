@@ -7,8 +7,8 @@ import numpy as np
 
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
 SCALE = 0.7
-FPS = 24.0
-SIZE = (320, 240)
+FPS = 15.0
+SIZE = (1920, 1080)
 
 # create handler for each connection
 async def handler(websocket, path):
