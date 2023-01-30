@@ -6,15 +6,9 @@ from picamera import PiCamera
 import numpy as np
 
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
-<<<<<<< HEAD
 SCALE = 0.7
 FPS = 15.0
 SIZE = (1920, 1080)
-=======
-# SCALE = 0.7
-FPS = 24.0
-SIZE = (640, 480)
->>>>>>> 4b6f68e09f322c0b3446aa0c640e9ee0585c4185
 
 # create handler for each connection
 async def handler(websocket, path):
